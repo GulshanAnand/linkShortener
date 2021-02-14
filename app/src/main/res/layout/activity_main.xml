@@ -52,7 +52,6 @@
                 android:layout_marginTop="100sp"
                 android:layout_marginLeft="20sp"
                 android:layout_marginRight="20sp"
-                android:inputType="numberDecimal"
                 />
         </LinearLayout>
         <LinearLayout
@@ -79,7 +78,6 @@
                 android:layout_marginTop="15sp"
                 android:layout_marginLeft="20sp"
                 android:layout_marginRight="20sp"
-                android:inputType="numberDecimal"
                 />
         </LinearLayout>
 
