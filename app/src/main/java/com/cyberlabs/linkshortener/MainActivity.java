@@ -18,4 +18,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this,RegisterActivity.class);
         startActivity(intent);
     }
+
+    public void signin(View view) {
+        if(true){
+            Intent intent = new Intent(this,linkmain.class);
+            startActivity(intent);
+        }
+    }
 }

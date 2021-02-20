@@ -37,20 +37,21 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Username:"
+                android:text="Email:"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:layout_marginTop="100sp"
                 android:layout_marginLeft="20sp"
+                android:width="100dp"
                 />
             <EditText
-                android:id="@+id/user"
+                android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textColorHint="#B1AEAE"
-                android:hint="Enter Your Username"
+                android:hint="Enter Your email address"
                 android:layout_marginTop="100sp"
                 android:layout_marginLeft="20sp"
                 android:layout_marginRight="20sp"
@@ -69,6 +70,7 @@
                 android:textSize="20sp"
                 android:layout_marginTop="15sp"
                 android:layout_marginLeft="20sp"
+                android:width="100dp"
                 />
             <EditText
                 android:id="@+id/pass"
@@ -93,6 +95,7 @@
             android:layout_marginTop="25sp"
             android:layout_gravity="center"
             android:text="Sign in"
+            android:onClick="signin"
             />
         <LinearLayout
             android:layout_width="wrap_content"
