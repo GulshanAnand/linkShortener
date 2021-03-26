@@ -12,12 +12,11 @@
     android:layout_height="match_parent"
     android:layout_margin="20dp"
     android:orientation="vertical">
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="70dp"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textColor="@color/black"
             android:text="Enter Your URL:"/>
     <LinearLayout
@@ -27,14 +26,16 @@
         android:layout_marginTop="10dp">
         <EditText
             android:id="@+id/longurl"
-            android:layout_width="330sp"
             android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
             android:singleLine="true"
-            android:textSize="17sp"/>
+            android:gravity="left"
+            android:layout_weight="1"
+            android:textSize="15sp"/>
         <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_gravity="right"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:gravity="right"
             android:src="@drawable/paste"
             android:onClick="paste"
             />
@@ -43,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="70dp"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textColor="@color/black"
             android:text="Shortened URL:"/>
     <LinearLayout
@@ -53,17 +54,19 @@
         android:orientation="horizontal">
             <EditText
                 android:id="@+id/shorturl"
-                android:layout_width="330sp"
+                android:gravity="left"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
                 android:singleLine="true"
                 android:editable="false"
                 android:textIsSelectable="true"
-                android:textSize="17sp"/>
+                android:textSize="15sp"/>
 
             <ImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_gravity="right"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:gravity="right"
                 android:src="@drawable/copy"
                 android:onClick="copy"
                 />

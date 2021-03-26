@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
@@ -67,20 +68,20 @@ public class MainActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 Log.d("MSG", "signInWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                progressBar.setVisibility(View.GONE);
+                                progressBar.setVisibility(View.INVISIBLE);
                                 startActivity(new Intent(MainActivity.this,linkmain.class));
+                                finish();
                             }
                             else if((task.getException() instanceof FirebaseAuthInvalidCredentialsException)||task.getException() instanceof FirebaseAuthInvalidUserException){
-                                progressBar.setVisibility(View.GONE);
+                                progressBar.setVisibility(View.INVISIBLE);
                                 Toast.makeText(MainActivity.this, "Invalid Email or Password",
                                         Toast.LENGTH_SHORT).show();
                             }
                             else {
                                 Log.w("MSG", "signInWithEmail:failure", task.getException());
-                                progressBar.setVisibility(View.GONE);
+                                progressBar.setVisibility(View.INVISIBLE);
                                 Toast.makeText(MainActivity.this, "Authentication failed.",
                                         Toast.LENGTH_SHORT).show();
-
                             }
 
 

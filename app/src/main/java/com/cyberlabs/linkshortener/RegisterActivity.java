@@ -4,11 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -18,11 +20,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class RegisterActivity extends AppCompatActivity {
     EditText fname;
     EditText lname;
-    EditText city;
     EditText mail;
     EditText pass;
     EditText rpass;
@@ -35,20 +37,16 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         fname=findViewById(R.id.fname1);
         lname=findViewById(R.id.lname1);
-        city=findViewById(R.id.city1);
         mail=findViewById(R.id.email1);
         pass=findViewById(R.id.pass1);
         rpass=findViewById(R.id.rpass1);
         progressBar=findViewById(R.id.progress);
 
     }
-
-
     public void signup(View view) {
         String firstName,lastName,address,email,password,rpassword;
         firstName=fname.getText().toString().trim();
         lastName=lname.getText().toString().trim();
-        address=city.getText().toString().trim();
         email=mail.getText().toString().trim();
         password=pass.getText().toString();
         rpassword=rpass.getText().toString();
@@ -69,11 +67,6 @@ public class RegisterActivity extends AppCompatActivity {
             mail.requestFocus();
             allright=false;
         }
-        if(address.isEmpty()){
-            city.setError("Please Enter Address");
-            city.requestFocus();
-            allright=false;
-        }
         if(firstName.isEmpty()){
             fname.setError("Please Enter First Name");
             fname.requestFocus();
@@ -92,15 +85,30 @@ public class RegisterActivity extends AppCompatActivity {
                                 Toast.makeText(RegisterActivity.this, "Registered Succesfully", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(RegisterActivity.this,MainActivity.class));
                                 finish();
-                                progressBar.setVisibility(View.GONE);
+                                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                            .setDisplayName(firstName+" "+lastName)
+                                            .setPhotoUri(null)
+                                            .build();
+
+                                    user.updateProfile(profileUpdates)
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isSuccessful()) {
+                                                        Log.d("user profile", "User profile updated.");
+                                                    }
+                                                }
+                                            });
+                                    progressBar.setVisibility(View.INVISIBLE);
                             }
                             else if(task.getException() instanceof FirebaseAuthUserCollisionException){
-                                progressBar.setVisibility(View.GONE);
+                                progressBar.setVisibility(View.INVISIBLE);
                                 Toast.makeText(RegisterActivity.this, "User already Registered", Toast.LENGTH_SHORT).show();
                             }
                             else if(!task.isSuccessful()){
                                 Log.w("MSG", "createUserWithEmail:failure", task.getException());
-                                progressBar.setVisibility(View.GONE);
+                                progressBar.setVisibility(View.INVISIBLE);
 
                                 Toast.makeText(RegisterActivity.this, "Authentication failed.",
                                         Toast.LENGTH_SHORT).show();
@@ -112,4 +120,6 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     }
+
+
 }
