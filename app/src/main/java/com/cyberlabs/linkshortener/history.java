@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,6 +36,7 @@ public class history extends AppCompatActivity {
         adp=new Adapter(options);
         recycler.setAdapter(adp);
     }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -44,4 +47,5 @@ public class history extends AppCompatActivity {
         super.onStop();
         adp.stopListening();
     }
+
 }

@@ -11,20 +11,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LinkShortener">
-        <activity android:name=".Profile"
-            android:parentActivityName=".linkmain"
-            android:label="Your Profile"/>
-        <activity android:name=".history"
-            android:parentActivityName=".linkmain"
-            android:label="History"/>
-        <activity android:name=".linkmain"
-            android:label="Shorten Your Link"
-            />
+        <activity android:name=".changepass"
+            android:parentActivityName=".Profile"
+            android:label="Change Your Password"></activity>
+        <activity
+            android:name=".Profile"
+            android:label="Your Profile"
+            android:parentActivityName=".linkmain" />
+        <activity
+            android:name=".history"
+            android:label="History"
+            android:parentActivityName=".linkmain" />
+        <activity
+            android:name=".linkmain"
+            android:label="Shorten Your Link" />
         <activity
             android:name=".RegisterActivity"
+            android:label="Registration Form"
             android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait"
-            android:label="Registration Form"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">

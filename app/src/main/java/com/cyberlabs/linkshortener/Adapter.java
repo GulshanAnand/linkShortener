@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +26,6 @@ import static android.content.Context.CLIPBOARD_SERVICE;
 import static androidx.core.content.ContextCompat.getSystemService;
 
 public class Adapter extends FirebaseRecyclerAdapter<Model,Adapter.Holder> {
-
 
     public Adapter(@NonNull FirebaseRecyclerOptions<Model> options) {
         super(options);
@@ -49,12 +49,14 @@ public class Adapter extends FirebaseRecyclerAdapter<Model,Adapter.Holder> {
     class Holder extends RecyclerView.ViewHolder{
             EditText originalURL,myshortURL;
             TextView datetime;
+            ImageView cpy;
 
             public Holder(@NonNull View itemView) {
                 super(itemView);
                 originalURL=itemView.findViewById(R.id.org1);
                 myshortURL=itemView.findViewById(R.id.short1);
                 datetime=itemView.findViewById(R.id.datetime1);
+                cpy=itemView.findViewById(R.id.hcopy);
                 itemView.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -68,9 +70,18 @@ public class Adapter extends FirebaseRecyclerAdapter<Model,Adapter.Holder> {
 
                     }
                 });
+                cpy.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ClipboardManager clipboard = (ClipboardManager) v.getContext().getSystemService(CLIPBOARD_SERVICE);
+                        ClipData clip = ClipData.newPlainText("Short URL",myshortURL.getText().toString());
+                        clipboard.setPrimaryClip(clip);
+                        Toast.makeText(v.getContext(), "link copied!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
             }
 
     }
-
 
 }
