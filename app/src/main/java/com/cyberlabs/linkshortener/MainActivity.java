@@ -45,20 +45,17 @@ public class MainActivity extends AppCompatActivity {
         String email,password;
         email=mail.getText().toString();
         password=pass.getText().toString();
-        boolean allright=true;
 
         if(password.isEmpty()){
             pass.setError("Please Enter Password");
             pass.requestFocus();
-            allright=false;
         }
-        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()||email.isEmpty()){
+        else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()||email.isEmpty()){
             mail.setError("Please Enter a valid email");
             mail.requestFocus();
-            allright=false;
         }
 
-        if(allright){
+        else {
             progressBar.setVisibility(View.VISIBLE);
             mAuth = FirebaseAuth.getInstance();
             mAuth.signInWithEmailAndPassword(email, password)
