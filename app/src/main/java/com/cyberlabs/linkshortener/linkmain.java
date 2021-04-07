@@ -186,6 +186,7 @@ public class linkmain extends AppCompatActivity {
         else if(sid==R.id.sout){
             FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(linkmain.this,MainActivity.class));
+            finish();
             return true;
         }
         else{
