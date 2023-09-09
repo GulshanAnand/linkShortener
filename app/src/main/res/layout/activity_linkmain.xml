@@ -28,11 +28,30 @@
             android:layout_height="85dp"
             android:src="@drawable/cuttly"/>
     </LinearLayout>
-
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="18dp"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/cuttly"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="true"
+                android:text="cutt.ly"/>
+            <RadioButton
+                android:id="@+id/lab"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="labwired.tech"/>
+        </RadioGroup>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="8dp"
             android:textSize="18sp"
             android:textColor="@color/black"
             android:text="Enter Your URL:"/>
@@ -59,10 +78,27 @@
             android:onClick="paste"
             />
     </LinearLayout>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="30dp"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:text="Alias (Optional):"/>
+        <EditText
+            android:id="@+id/eAlias"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:singleLine="true"
+            android:textIsSelectable="true"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
             android:textSize="18sp"
             android:textColor="@color/black"
             android:text="Shortened URL:"/>
@@ -98,7 +134,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="30dp"
                 android:text="Generate URL"
                 android:layout_gravity="center"
                 android:onClick="gen"/>
