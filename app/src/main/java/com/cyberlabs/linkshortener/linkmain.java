@@ -118,33 +118,22 @@ public class linkmain extends AppCompatActivity {
             Log.d("Post", "onPostExecute: ran");
             shortURL=s;
             if(st==1){
-                Toast.makeText(linkmain.this, "The link has already been shortened",
-                        Toast.LENGTH_SHORT).show();
-                pb.setVisibility(View.INVISIBLE);
-            }
-            else if(st==2){
-
-                Toast.makeText(linkmain.this, "Link has been shortened",
+                Toast.makeText(linkmain.this, "Internal Server Error",
                         Toast.LENGTH_SHORT).show();
                 pb.setVisibility(View.INVISIBLE);
             }
             else if(st==3){
-                Toast.makeText(linkmain.this, "The preferred link name is already taken",
+                Toast.makeText(linkmain.this, "The entered URL is invalid",
                         Toast.LENGTH_SHORT).show();
                 pb.setVisibility(View.INVISIBLE);
             }
             else if(st==4){
-                Toast.makeText(linkmain.this, "Invalid API key",
+                Toast.makeText(linkmain.this, "Alias already taken",
                         Toast.LENGTH_SHORT).show();
                 pb.setVisibility(View.INVISIBLE);
             }
             else if(st==5){
-                Toast.makeText(linkmain.this, "The link includes invalid characters",
-                        Toast.LENGTH_SHORT).show();
-                pb.setVisibility(View.INVISIBLE);
-            }
-            else if(st==6){
-                Toast.makeText(linkmain.this, "The link provided is from a blocked domain",
+                Toast.makeText(linkmain.this, "Alias contains invalid characters",
                         Toast.LENGTH_SHORT).show();
                 pb.setVisibility(View.INVISIBLE);
             }
@@ -205,6 +194,10 @@ public class linkmain extends AppCompatActivity {
                 e.printStackTrace();
                 pb.setVisibility(View.INVISIBLE);
             }
+            catch (Exception e){
+                e.printStackTrace();
+                pb.setVisibility(View.INVISIBLE);
+            }
             Log.d("Bg", "doInBackground: ran");
             return output;
         }
@@ -225,7 +218,7 @@ public class linkmain extends AppCompatActivity {
                 pb.setVisibility(View.INVISIBLE);
             }
             else if(st==3){
-                Toast.makeText(linkmain.this, "The preferred link name is already taken",
+                Toast.makeText(linkmain.this, "The entered URL is invalid",
                         Toast.LENGTH_SHORT).show();
                 pb.setVisibility(View.INVISIBLE);
             }
@@ -342,7 +335,17 @@ public class linkmain extends AppCompatActivity {
             }
             else{
                 String req = "https://labwired.tech/shorten";
-                String jsonData = "{\"url\":\"" + longURL + "\",\"alias\":\"" + alias + "\"}";
+                JSONObject jsonObject = new JSONObject();
+                try{
+                    jsonObject.put("url", longURL);
+                    jsonObject.put("alias", alias);
+                }
+                catch(Exception e){
+                    e.printStackTrace();
+                }
+
+                String jsonData = jsonObject.toString();
+//                String jsonData = "{\"url\":\"" + longURL + "\",\"alias\":\"" + alias + "\"}";
                 pb.setVisibility(View.VISIBLE);
                 BG2 myTask = new BG2();
                 myTask.execute(req, jsonData);
