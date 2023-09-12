@@ -26,9 +26,10 @@ import static android.content.Context.CLIPBOARD_SERVICE;
 import static androidx.core.content.ContextCompat.getSystemService;
 
 public class Adapter extends FirebaseRecyclerAdapter<Model,Adapter.Holder> {
-
-    public Adapter(@NonNull FirebaseRecyclerOptions<Model> options) {
+    ProgressBar pb;
+    public Adapter(@NonNull FirebaseRecyclerOptions<Model> options, ProgressBar pb) {
         super(options);
+        this.pb = pb;
     }
 
     @Override
@@ -84,4 +85,11 @@ public class Adapter extends FirebaseRecyclerAdapter<Model,Adapter.Holder> {
 
     }
 
+    @Override
+    public void onDataChanged() {
+        super.onDataChanged();
+        if(pb != null){
+            pb.setVisibility(View.INVISIBLE);
+        }
+    }
 }
