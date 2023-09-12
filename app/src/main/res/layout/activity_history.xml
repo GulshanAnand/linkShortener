@@ -8,6 +8,12 @@
     android:theme="@style/Theme.MaterialComponents.Light"
     tools:context=".history">
 
+    <ProgressBar
+        android:id="@+id/hpb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="visible"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler1"
         android:layout_width="match_parent"

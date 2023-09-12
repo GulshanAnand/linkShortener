@@ -19,11 +19,14 @@ import com.google.firebase.database.Query;
 public class history extends AppCompatActivity {
     RecyclerView recycler;
     Adapter adp;
+    ProgressBar pb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
         recycler=findViewById(R.id.recycler1);
+        pb=findViewById(R.id.hpb);
+        pb.setVisibility(View.VISIBLE);
         LinearLayoutManager lm=new LinearLayoutManager(this);
         lm.setReverseLayout(true);
         lm.setStackFromEnd(true);
@@ -33,8 +36,9 @@ public class history extends AppCompatActivity {
                 new FirebaseRecyclerOptions.Builder<Model>()
                         .setQuery(FirebaseDatabase.getInstance().getReference().child("uid").child(u.getUid()), Model.class)
                         .build();
-        adp=new Adapter(options);
+        adp=new Adapter(options, pb);
         recycler.setAdapter(adp);
+//        pb.setVisibility(View.INVISIBLE);
     }
 
     @Override
