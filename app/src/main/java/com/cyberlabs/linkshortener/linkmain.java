@@ -39,7 +39,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class linkmain extends AppCompatActivity {
     EditText slink;
@@ -248,14 +250,17 @@ public class linkmain extends AppCompatActivity {
     }
 
     private void updatedb() {
-        String s= Calendar.getInstance().getTime().toString();
-        String currtime=s.substring(8,10) + s.substring(3,7) + s.substring(s.length()-5,s.length()) + s.substring(10,19);
+        Date today = new Date();
+        SimpleDateFormat timeStampFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+        SimpleDateFormat readableDateFormat = new SimpleDateFormat("d MMM yyyy HH:mm:ss");
+        String timeStamp = timeStampFormat.format(today);
+        String currtime = readableDateFormat.format(today);
         FirebaseUser usr= FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference Ref = db.getReference("uid");
         DatabaseReference uidRef = Ref.child(usr.getUid());
-        uidRef.child(currtime);
-        DatabaseReference timeRef = uidRef.child(currtime);
+        uidRef.child(timeStamp);
+        DatabaseReference timeRef = uidRef.child(timeStamp);
         timeRef.child("originalurl").setValue(longURL);
         timeRef.child("shorturl").setValue(shortURL);
         timeRef.child("time").setValue(currtime);
